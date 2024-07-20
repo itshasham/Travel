@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Login.css'; // Import your CSS file for styling
 import loginImage from '../assets/images/london.jpg'; // Import your image
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../store/token"; // Import the useAuth hook
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -9,12 +11,11 @@ const Login = () => {
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { storeTokenInLS } = useAuth(); // Use the storeTokenInLS function from the Auth context
 
   const handleInput = (e) => {
-    console.log(e);
-    let name = e.target.name;
-    let value = e.target.value;
-
+    const { name, value } = e.target;
     setUser({
       ...user,
       [name]: value,
@@ -36,16 +37,21 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        const errorText = await response.text(); // Get error response body
+        const errorText = await response.text();
         throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
       }
 
       const data = await response.json();
       console.log('Login successful:', data);
       alert('Login successful');
-      // Redirect or update UI based on success
+
+      // Save token to local storage and context state
+      storeTokenInLS(data.token);
+      navigate('/'); // Redirect to the homepage or another route after login
+
     } catch (error) {
       console.error('Fetch error:', error);
+      setError('Login failed. Please try again.');
       alert('Login failed. Please try again.'); // Display user-friendly message
     }
   };
@@ -53,7 +59,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-image">
-        
+        <img src={loginImage} alt="Login" />
       </div>
       <div className="login-form">
         <h2>Login</h2>
@@ -68,6 +74,7 @@ const Login = () => {
               value={user.email}
               onChange={handleInput}
               placeholder="Enter your email"
+              required
             />
           </div>
           <div className="form-group">
@@ -79,9 +86,10 @@ const Login = () => {
               value={user.password}
               onChange={handleInput}
               placeholder="Enter your password"
+              required
             />
           </div>
-          <button className="btn-submit">
+          <button className="btn-submit" type="submit">
             Login
           </button>
         </form>

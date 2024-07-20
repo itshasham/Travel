@@ -13,7 +13,7 @@ const home = async (req, res) => {
 
 const register = async (req, res) => {
   const { username, email, password, phoneno } = req.body;
-  console.log(phoneno);
+  console.log("hello");
   try {
     // Check if the email already exists in the database
     const existingUser = await User.findOne({ email });
@@ -22,11 +22,14 @@ const register = async (req, res) => {
       return res.status(400).json({ error: 'Email already exists' });
     }
 
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new user
-    const newUser = new User({ username, email, password, phoneno });
+    const newUser = new User({ username, email, password: hashedPassword, phoneno });
     await newUser.save();
 
-    // Generate token
+    // Generate token (assuming you have a method to generate token)
     const token = newUser.generateToken();
 
     res.status(201).json({
@@ -81,6 +84,16 @@ const login = async (req, res) => {
         return res.status(500).json({ msg: "Server Error" });
     }
 };
+const user = async (req, res) => {
+  try {
+    // Assuming the user data is set by the authMiddleware
+    const userData = req.user;
+    console.log(userData);
+    return res.status(200).json({msg: userData});
+  } catch (error) {
+    console.log(`Error from user route: ${error}`);
+    res.status(500).json({ message: "Error fetching user data" });
+  }
+};
 
-
-module.exports = { home, register, login };
+module.exports = { home, register, login, user };

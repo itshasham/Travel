@@ -1,5 +1,6 @@
 const validate = (schema) => async (req, res, next) => {
   try {
+    console.log("h1");
     const parseBody = await schema.parseAsync(req.body);
     req.body = parseBody;
     return next();
@@ -14,7 +15,8 @@ const validate = (schema) => async (req, res, next) => {
       extraDetails,
     };
 
-    next(extraDetails);
+    // Pass the error object to the next middleware
+    next(error);
   }
 };
 

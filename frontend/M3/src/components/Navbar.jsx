@@ -1,38 +1,55 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png'; // Adjust the path as per your project structure
-import './Navbar.css'; // Adjust the path if needed
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
+import { useAuth } from "../store/token";
 
 const Navbar = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
-    <header className='header1'>
-      <nav className='navbar'>
+    <>
+      <header>
         <div className="container">
-          <div className='logo'>
-            {/* <img src={logo} alt="logo" style={{ width: '7em', height: '6.6em' }} /> */}
+          <div className="logo-brand">
+            <NavLink to="/">MEMORABLE TOURS</NavLink>
           </div>
-          <ul className='nav-item'>
-            <li className="nav-items">
-              <Link to="/">HOME</Link>
-            </li>
-            <li className="nav-items">
-              <Link to="/ContactUs">Contact US</Link>
-            </li>
-            <li className="nav-items">
-              <Link to="/About">About</Link>
-            </li>
-            <li className="nav-items">
-              <Link to="/register">Register</Link>
-            </li>
-            <li className="nav-items">
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
+
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/"> Home </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about"> About </NavLink>
+              </li>
+              <li>
+                <NavLink to="/service"> Services </NavLink>
+              </li>
+              {isLoggedIn ? (
+                <>
+                  <li>
+                    <NavLink to="/logout"> Logout </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/contactus"> Contact </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink to="/register"> Register </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/login"> Login </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
         </div>
-      </nav>
-      
-    </header>
+      </header>
+    </>
   );
-}
+};
 
 export default Navbar;

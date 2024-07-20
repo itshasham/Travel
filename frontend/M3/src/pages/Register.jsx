@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import './Register.css'; // Import your CSS file for styling
 import natureImage from '../assets/images/register.jpg'; // Import your image
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../store/token';
 
 const Register = () => {
   const [user, setUser] = useState({
     username: "hasham",
     email: "",
     phoneno: "123569876",
-    password: "113131313",
+    password: "12345678",
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Use the useNavigate hook
+  const storeTokenInLS = useAuth();
 
- const handleInput = (e) => {
-    console.log(e);
-    let name = e.target.name;
-    let value = e.target.value;
-
+  const handleInput = (e) => {
+    const { name, value } = e.target;
     setUser({
       ...user,
       [name]: value,
@@ -33,7 +34,6 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        withCredentials:true,
         body: JSON.stringify(user),
       });
 
@@ -44,12 +44,15 @@ const Register = () => {
 
       const data = await response.json();
       console.log('Registration successful:', data);
-      alert('Registration successful');
-      // Redirect or update UI based on success
+
+      // Store the token in localStorage
+      
+
+      setUser({ username: "", email: "", phoneno: "", password: "" });
+      navigate('/login'); // Redirect to login page upon successful registration
     } catch (error) {
       console.error('Fetch error:', error);
-     
-      alert('Registration failed. Please try again.'); // Display user-friendly message
+      setError('Registration failed. Please try again.');
     }
   };
 
@@ -107,7 +110,7 @@ const Register = () => {
               autoComplete="off"
             />
           </div>
-          <button  className="btn-submit">
+          <button className="btn-submit">
             Register
           </button>
         </form>

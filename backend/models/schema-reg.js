@@ -35,8 +35,10 @@ userSchema.methods.generateToken = function() {
         email: this.email,
         admin: this.admin,
       },
-      'your_jwt_secret', // Replace with your JWT secret
-      { expiresIn: '1h' } // Set token expiration
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn:"30d",
+    }
     );
   } catch (error) {
     console.error(error);

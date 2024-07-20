@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017/registration"; // Replace 'admin' with your actual database name
-// const mongoURI = process.env.mongoURl;
+const mongoURI = process.env.Mongo; // Replace 'admin' with your actual database name
+
 const connectToMongo = async () => {
     try {
         await mongoose.connect(mongoURI);

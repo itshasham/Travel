@@ -5,7 +5,8 @@ import Register from "./pages/Register";
 import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
-import About from './pages/ContactUs'
+import  About  from './pages/About';
+import Logout from './pages/Logout'
 const App = () => {
   return (
 
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/Logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );
