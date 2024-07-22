@@ -10,13 +10,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
-  background-color: #333;
+  
+  background-color: #a9b38498;
   color: #fff;
 }
 
 /* Logo Brand Styling */
 .logo-brand {
+  padding-left: 10em;
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -46,13 +47,13 @@ nav ul li a {
 
 /* Hover effect */
 nav ul li a:hover {
-  background-color: #575757;
+  background-color: #556161;
   border-radius: 5px;
 }
 
 /* Active link styling */
 nav ul li a.active {
-  background-color: #444;
+  background-color: #556161;
   border-radius: 5px;
 }
 

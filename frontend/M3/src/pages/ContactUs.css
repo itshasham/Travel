@@ -1,104 +1,40 @@
-/* ContactUs.jsx */
 .section-contact {
-  padding: 80px 0;
-  background-color: #f9f9f9;
-}
+  & .contact-content {
+    padding: 0;
 
-.contact-content {
-  text-align: center;
-  margin-bottom: 40px;
-}
+    & h1 {
+      margin-bottom: 3.2rem;
+    }
+  }
+  & .container {
+    padding-top: 3.2rem;
+  }
+  & .contact-img {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    & img {
+      width: 80%;
+      height: auto;
+    }
+  }
 
-.main-heading {
-  font-size: 2.5rem;
-  color: #333;
-}
+  & .section-form {
+    & form {
+      display: flex;
+      flex-direction: column;
+      gap: 3.2rem;
+    }
+    & label {
+      display: block;
+      margin-bottom: 1.2rem;
+      text-transform: capitalize;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.grid {
-  display: grid;
-  gap: 20px;
-}
-
-.grid-half-cols {
-  grid-template-columns: 1fr 1fr;
-}
-
-.contact-img {
-  text-align: center;
-}
-
-.contact-img img {
-  max-width: 100%;
-  height: auto;
-}
-
-.section-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-textarea {
-  height: 120px;
-}
-
-.btn-submit {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-submit:hover {
-  background-color: #0056b3;
-}
-
-.secondary-btn {
-  background-color: #6c757d;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.secondary-btn:hover {
-  background-color: #5a6268;
-}
-
-@media screen and (max-width: 768px) {
-  .grid-half-cols {
-    grid-template-columns: 1fr;
+    & input,
+    textarea {
+      width: 80%;
+      padding: 0.4rem 0.6rem;
+    }
   }
 }

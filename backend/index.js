@@ -1,8 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const connectToMongo = require('./utils/db'); // Assuming this file exports a function to connect to MongoDB
+
+const connectToMongo = require('./utils/db'); 
+// Assuming this file exports a function to connect to MongoDB
 const Authroute = require('./router/router-reg'); // Assuming this file defines authentication routes
-const AuthContact = require('./router/router-contactus'); // Assuming this file defines contact form routes
+const AuthContact = require('./router/router-contactus');
+const AuthService=require("./router/router-service");
 const errorMiddleware=require('./middleware/validate-error')
 const cors = require('cors');
 
@@ -17,6 +20,7 @@ app.use(express.json()); // Parse incoming JSON requests
 // Routes
 app.use('/api/auth', Authroute); // Authentication routes
 app.use('/api/form', AuthContact); // Contact form routes
+app.use('/api/Provider',AuthService);
 app.use(errorMiddleware);
 // Connect to MongoDB
 connectToMongo().catch(error => {
